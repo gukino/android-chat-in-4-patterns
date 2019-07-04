@@ -1,11 +1,13 @@
-package nju.androidchat.client.mvp0;
+package nju.androidchat.client.hw1;
 
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -15,7 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.PatternSyntaxException;
 
+import kotlin.text.Regex;
 import lombok.extern.java.Log;
 import nju.androidchat.client.ClientMessage;
 import nju.androidchat.client.R;
@@ -46,6 +50,27 @@ public class Mvp0TalkActivity extends AppCompatActivity implements Mvp0Contract.
         presenter.start();
     }
 
+    private void refreshMessageList(String text) {
+        Regex regex = new Regex("\\!\\[\\]\\(\\{.*\\}\\)");
+        String str = text;
+        if (regex.matches(str)){
+            try{
+                String s =str.split("\\{")[1];
+                String url = s.substring(0,s.length()-2);
+
+                String url1 = "https://aod-image-material.cdn.bcebos.com/5/pic/0f70f8569f25149025fc80f819f51cd0.jpg";
+
+//                ImageUtils.setImageBitmap(url1);
+//                Bitmap bitmap = ImageUtils.getBitmap();
+//                System.out.println(bitmap);
+
+            }catch (PatternSyntaxException e) {
+                e.printStackTrace();
+            }
+            System.out.println(str);
+        }
+    }
+
     @Override
     public void showMessageList(List<ClientMessage> messages) {
         runOnUiThread(() -> {
@@ -56,10 +81,30 @@ public class Mvp0TalkActivity extends AppCompatActivity implements Mvp0Contract.
 
                     // 增加ItemText
                     for (ClientMessage message : messages) {
+
                         String text = String.format("%s", message.getMessage());
+
                         // 如果是自己发的，增加ItemTextSend
                         if (message.getSenderUsername().equals(this.presenter.getUsername())) {
-                            content.addView(new ItemTextSend(this, text, message.getMessageId(), this));
+
+//                            text = "![]({https://aod-image-material.cdn.bcebos.com/5/pic/0f70f8569f25149025fc80f819f51cd0.jpg})";
+
+                            Regex regex = new Regex("\\!\\[\\]\\(\\{.*\\}\\)");
+                            if (regex.matches(text)) {
+                                String s =text.split("\\{")[1];
+                                String url = s.substring(0,s.length()-2);
+
+                                System.out.println(url);
+
+                                ImageView imageView = new ImageView(this);
+                                ImageUtils.setImageBitmap(url,imageView);
+                                content.addView(imageView);
+//                                content.addView(new ItemTextSend(this, text, message.getMessageId(), this));
+                            }else{
+                                content.addView(new ItemTextSend(this, text, message.getMessageId(), this));
+                            }
+
+
                         } else {
                             content.addView(new ItemTextReceive(this, text, message.getMessageId()));
                         }

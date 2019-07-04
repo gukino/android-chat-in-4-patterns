@@ -1,4 +1,4 @@
-package nju.androidchat.client.mvp0;
+package nju.androidchat.client.hw1;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,7 +8,6 @@ import java.util.UUID;
 import lombok.Setter;
 import lombok.extern.java.Log;
 import nju.androidchat.client.ClientMessage;
-import nju.androidchat.client.mvc0.Mvc0TalkModel;
 import nju.androidchat.client.socket.MessageListener;
 import nju.androidchat.client.socket.SocketClient;
 import nju.androidchat.shared.message.ClientSendMessage;
