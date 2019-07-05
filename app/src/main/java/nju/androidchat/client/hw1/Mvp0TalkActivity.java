@@ -96,12 +96,11 @@ public class Mvp0TalkActivity extends AppCompatActivity implements Mvp0Contract.
 
                                 System.out.println(url);
 
-                                ImageView imageView = new ImageView(this);
-                                ImageUtils.setImageBitmap(url,imageView);
-                                content.addView(imageView);
-//                                content.addView(new ItemTextSend(this, text, message.getMessageId(), this));
+                                Bitmap bitmap = null;
+                                ImageUtils.setImageBitmap(url,bitmap);
+                                content.addView(new ItemTextSend(this, text, bitmap, message.getMessageId(), this));
                             }else{
-                                content.addView(new ItemTextSend(this, text, message.getMessageId(), this));
+                                content.addView(new ItemTextSend(this, text, null,message.getMessageId(), this));
                             }
 
 

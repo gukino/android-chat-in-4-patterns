@@ -64,9 +64,9 @@ public class Mvc0TalkActivity extends AppCompatActivity
                 String text = String.format("%s", message.getMessage());
                 // 如果是自己发的，增加ItemTextSend，并传入撤回请求事件处理
                 if (message.getSenderUsername().equals(model.getUsername())) {
-                    content.addView(new ItemTextSend(this, text, message.getMessageId(), this));
+                    content.addView(new ItemTextSend(this, text, null, message.getMessageId(), this));
                 } else {
-                    content.addView(new ItemTextReceive(this, text, message.getMessageId()));
+                    content.addView(new ItemTextReceive(this, text,  message.getMessageId()));
                 }
             }
 

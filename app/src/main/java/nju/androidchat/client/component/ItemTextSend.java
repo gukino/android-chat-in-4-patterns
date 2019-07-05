@@ -3,8 +3,10 @@ package nju.androidchat.client.component;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,18 +22,25 @@ public class ItemTextSend extends LinearLayout implements View.OnLongClickListen
     int index0 = 0;
 
     private TextView textView;
+    private ImageView imageView;
     private Context context;
     private UUID messageId;
     @Setter private OnRecallMessageRequested onRecallMessageRequested;
 
-    public ItemTextSend(Context context, String text, UUID messageId, OnRecallMessageRequested onRecallMessageRequested) {
+    public ItemTextSend(Context context, String text, Bitmap bitmap, UUID messageId, OnRecallMessageRequested onRecallMessageRequested) {
         super(context);
         this.context = context;
         inflate(context, R.layout.item_text_send, this);
         this.textView = findViewById(R.id.chat_item_content_text);
+        this.imageView = findViewById(R.id.imageView);
         this.messageId = messageId;
         this.onRecallMessageRequested = onRecallMessageRequested;
 
+        if (bitmap != null ){
+            setIamgeView(bitmap);
+        }else{
+            imageView.setVisibility(INVISIBLE);
+        }
         this.setOnLongClickListener(this);
         setText(text);
     }
@@ -42,6 +51,10 @@ public class ItemTextSend extends LinearLayout implements View.OnLongClickListen
 
     public void setText(String text) {
         textView.setText(text);
+    }
+
+    public void setIamgeView(Bitmap bitmap){
+        imageView.setImageBitmap(bitmap);
     }
 
     @Override

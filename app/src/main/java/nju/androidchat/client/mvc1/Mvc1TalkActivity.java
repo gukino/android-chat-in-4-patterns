@@ -59,7 +59,7 @@ public class Mvc1TalkActivity extends AppCompatActivity implements Mvc1TalkModel
                 String text = String.format("%s", message.getMessage());
                 // 如果是自己发的，增加ItemTextSend
                 if (message.getSenderUsername().equals(model.getUsername())) {
-                    content.addView(new ItemTextSend(this, text, message.getMessageId(), this));
+                    content.addView(new ItemTextSend(this, text, null,  message.getMessageId(), this));
                 } else {
                     content.addView(new ItemTextReceive(this, text, message.getMessageId()));
                 }

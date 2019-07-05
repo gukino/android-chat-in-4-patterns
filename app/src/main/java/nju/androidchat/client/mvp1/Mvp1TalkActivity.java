@@ -59,7 +59,7 @@ public class Mvp1TalkActivity extends AppCompatActivity implements Mvp1Contract.
                         String text = String.format("%s", message.getMessage());
                         // 如果是自己发的，增加ItemTextSend
                         if (message.getSenderUsername().equals(this.presenter.getUsername())) {
-                            content.addView(new ItemTextSend(this, text, message.getMessageId(), this));
+                            content.addView(new ItemTextSend(this, text, null, message.getMessageId(), this));
                         } else {
                             content.addView(new ItemTextReceive(this, text, message.getMessageId()));
                         }

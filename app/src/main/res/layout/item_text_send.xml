@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_text_send"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -17,8 +18,8 @@
         android:visibility="gone" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp">
@@ -28,6 +29,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
+            android:layout_marginEnd="2dp"
             android:src="@mipmap/ic_head_default_right" />
 
         <LinearLayout
@@ -41,14 +43,22 @@
 
             <TextView
                 android:id="@+id/chat_item_content_text"
-                android:layout_width="match_parent"
+                android:layout_width="137dp"
                 android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/chat_item_layout_content"
                 android:background="@drawable/message_text_send"
                 android:text="你好"
                 android:textColor="#333333"
                 android:textSize="14sp" />
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_input_add" />
+
         </LinearLayout>
+
     </RelativeLayout>
 
 </LinearLayout>

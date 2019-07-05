@@ -18,7 +18,7 @@ import java.net.URL;
 
 public class ImageUtils {
     public static final String PATH = "/mypicture/con/";
-    private static ImageView showImageView;
+    private static Bitmap bm;
     private static String mUrl;
 
     public static String getFileName(String url) {
@@ -26,12 +26,12 @@ public class ImageUtils {
         return url.substring(index);
     }
 
-    public static void setImageBitmap(String url, ImageView iv) {
-        showImageView = iv;
+    public static void setImageBitmap(String url, Bitmap bitmap) {
+        bm = bitmap;
         mUrl = url;
         Bitmap loacalBitmap = ImageUtils.getLoacalBitmap(Environment.getExternalStorageDirectory() + ImageUtils.PATH + ImageUtils.getFileName(url));
         if (loacalBitmap != null) {
-            showImageView.setImageBitmap(loacalBitmap);
+            bm=loacalBitmap;
             Log.d("ImageUtils", "本地获取");
         } else {
             Log.d("ImageUtils", "网络获取");
@@ -131,7 +131,7 @@ public class ImageUtils {
             if(result!=null){
                 File file = saveImage(result, Environment.getExternalStorageDirectory() + PATH, getFileName(mUrl));
                 Log.d("ImageUtils", file.toString());
-                showImageView.setImageBitmap(result);
+                bm=result;
             }
         }
     }
