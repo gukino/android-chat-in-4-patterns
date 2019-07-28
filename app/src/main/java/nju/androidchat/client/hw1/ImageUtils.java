@@ -29,14 +29,14 @@ public class ImageUtils {
     public static void setImageBitmap(String url, Bitmap bitmap) {
         bm = bitmap;
         mUrl = url;
-        Bitmap loacalBitmap = ImageUtils.getLoacalBitmap(Environment.getExternalStorageDirectory() + ImageUtils.PATH + ImageUtils.getFileName(url));
-        if (loacalBitmap != null) {
-            bm=loacalBitmap;
-            Log.d("ImageUtils", "本地获取");
-        } else {
+//        Bitmap loacalBitmap = ImageUtils.getLoacalBitmap(Environment.getExternalStorageDirectory() + ImageUtils.PATH + ImageUtils.getFileName(url));
+//        if (loacalBitmap != null) {
+//            bm=loacalBitmap;
+//            Log.d("ImageUtils", "本地获取");
+//        } else {
             Log.d("ImageUtils", "网络获取");
             new DownImgAsyncTask().execute(url);
-        }
+//        }
     }
 
     /** * 通过URL地址获取Bitmap对象 * @Title: getBitMapByUrl * @param @param url * @param @return * @param @throws Exception * @return Bitmap * @throws */
@@ -52,6 +52,8 @@ public class ImageUtils {
             is = conn.getInputStream();
             bitmap = BitmapFactory.decodeStream(is);
             Log.d("shaoace", "1");
+            Log.d("bitmap", "ok?");
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -122,6 +124,7 @@ public class ImageUtils {
         @Override
         protected Bitmap doInBackground(String... params) {
             Bitmap b = getBitmapByUrl(params[0]);
+            bm = b;
             return b;
         }
 
@@ -129,9 +132,9 @@ public class ImageUtils {
         protected void onPostExecute(Bitmap result) {
             super.onPostExecute(result);
             if(result!=null){
-                File file = saveImage(result, Environment.getExternalStorageDirectory() + PATH, getFileName(mUrl));
-                Log.d("ImageUtils", file.toString());
-                bm=result;
+//                File file = saveImage(result, Environment.getExternalStorageDirectory() + PATH, getFileName(mUrl));
+//                Log.d("ImageUtils", file.toString());
+//                bm=result;
             }
         }
     }
